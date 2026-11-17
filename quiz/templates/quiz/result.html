@@ -1,0 +1,14 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+<h1>{{ r.score }} / {{ r.total }} ({{ r.percent }}%)</h1>
+<div class="card">
+{% if r.passed %}
+  <p class="ok">Well done, {{ r.student_name }}! You passed {{ r.category }}.</p>
+  <a class="btn" href="{% url 'certificate' r.certificate_id %}">View certificate</a>
+{% else %}
+  <p class="err">You need {{ pass_percent }}% to earn a certificate. Give it another try.</p>
+  <a class="btn" href="{% url 'quiz' r.category %}">Retake quiz</a>
+{% endif %}
+  <a class="btn alt" href="{% url 'home' %}">Back to quizzes</a>
+</div>
+{% endblock %}

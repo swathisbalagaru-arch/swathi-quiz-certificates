@@ -1,0 +1,22 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+<h1>Welcome, {{ name }}</h1>
+<p>Score {{ pass_percent }}% or more to receive a certificate.</p>
+{% for c in categories %}
+<div class="card">
+  <h2>{{ c.name }}</h2>
+  <p>{{ c.count }} questions</p>
+  <a class="btn" href="{% url 'quiz' c.name %}">Take quiz</a>
+</div>
+{% endfor %}
+{% if mine %}
+<h2>Your attempts</h2>
+<div class="card"><table>
+<tr><th>Quiz</th><th>Score</th><th>Date</th><th></th></tr>
+{% for r in mine %}
+<tr><td>{{ r.category }}</td><td>{{ r.score }}/{{ r.total }}</td><td>{{ r.created_at|date:"d M Y" }}</td>
+<td>{% if r.passed %}<a href="{% url 'certificate' r.certificate_id %}">Certificate</a>{% else %}&mdash;{% endif %}</td></tr>
+{% endfor %}
+</table></div>
+{% endif %}
+{% endblock %}

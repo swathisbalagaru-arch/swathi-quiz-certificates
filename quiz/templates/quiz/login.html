@@ -1,0 +1,11 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+<h1>Test what you know. Earn a certificate.</h1>
+<p>Enter your name as you want it printed on your certificate.</p>
+<form method="post" class="card">{% csrf_token %}
+  <label for="name">Full name</label>
+  <input type="text" id="name" name="name" maxlength="100" required autofocus>
+  {% if error %}<p class="err">{{ error }}</p>{% endif %}
+  <button type="submit">Start</button>
+</form>
+{% endblock %}

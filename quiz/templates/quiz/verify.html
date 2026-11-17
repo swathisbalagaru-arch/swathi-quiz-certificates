@@ -1,0 +1,20 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+<h1>Verify a certificate</h1>
+<form method="get" class="card">
+  <label for="code">Certificate ID</label>
+  <input type="text" id="code" name="code" value="{{ code }}" placeholder="SW-1A2B3C4D" required>
+  <button type="submit">Verify</button>
+</form>
+{% if searched %}
+<div class="card">
+{% if r %}
+  <p class="ok"><strong>Valid certificate.</strong></p>
+  <p>{{ r.student_name }} passed <strong>{{ r.category }}</strong> with {{ r.score }}/{{ r.total }} ({{ r.percent }}%) on {{ r.created_at|date:"d F Y" }}.</p>
+  <a href="{% url 'certificate' r.certificate_id %}">View certificate</a>
+{% else %}
+  <p class="err">No valid certificate found for that ID.</p>
+{% endif %}
+</div>
+{% endif %}
+{% endblock %}

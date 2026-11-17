@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificate - {{ r.student_name }}</title>
+<style>
+body{margin:0;background:#e9edf2;font-family:Georgia,serif;color:#14213d;display:flex;flex-direction:column;align-items:center;padding:20px}
+.cert{width:100%;max-width:900px;aspect-ratio:1.414/1;background:#fff;border:10px double #b8860b;padding:5%;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.cert h1{font-size:clamp(1.6rem,5vw,3rem);margin:0 0 .3em;letter-spacing:.04em}
+.name{font-size:clamp(1.5rem,5vw,2.8rem);font-style:italic;border-bottom:2px solid #b8860b;display:inline-block;padding:0 .6em;margin:.3em auto}
+.small{font:clamp(.7rem,1.6vw,.95rem) system-ui,sans-serif;color:#4a5568}
+button{margin-top:16px;background:#0b7a75;color:#fff;border:0;padding:10px 20px;border-radius:8px;font:600 1rem system-ui}
+@media print{body{background:#fff;padding:0}button,.back{display:none}.cert{border-width:10px}}
+</style>
+</head>
+<body>
+<div class="cert">
+  <h1>Certificate of Achievement</h1>
+  <p class="small">This is proudly presented to</p>
+  <div><span class="name">{{ r.student_name }}</span></div>
+  <p>for successfully completing the <strong>{{ r.category }}</strong> quiz<br>with a score of <strong>{{ r.score }}/{{ r.total }} ({{ r.percent }}%)</strong>.</p>
+  <p class="small">Issued by Swathi Quiz &amp; Certificates &middot; {{ r.created_at|date:"d F Y" }}<br>Certificate ID: <strong>{{ r.certificate_id }}</strong></p>
+</div>
+<button onclick="window.print()">Print / Save as PDF</button>
+<p class="back small"><a href="{% url 'home' %}">Back to quizzes</a></p>
+</body>
+</html>

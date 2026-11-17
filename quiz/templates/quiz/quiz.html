@@ -1,0 +1,16 @@
+{% extends "quiz/base.html" %}
+{% block title %}{{ category }}{% endblock %}
+{% block content %}
+<h1>{{ category }}</h1>
+<form method="post">{% csrf_token %}
+{% for i, item in questions %}
+<div class="card">
+  <p><strong>{{ forloop.counter }}. {{ item.q }}</strong></p>
+  {% for opt in item.options %}
+  <label class="opt"><input type="radio" name="q{{ i }}" value="{{ forloop.counter0 }}"> {{ opt }}</label>
+  {% endfor %}
+</div>
+{% endfor %}
+<button type="submit">Submit answers</button>
+</form>
+{% endblock %}
